@@ -1,18 +1,15 @@
-from typing import Optional, List, Dict
-
-
 class HTMLNode:
     def __init__(
         self,
-        tag: Optional[str] = None,
-        value: Optional[str] = None,
-        children: Optional[List["HTMLNode"]] = None,
-        props: Optional[Dict[str, str]] = None,
+        tag: str | None = None,
+        value: str | None = None,
+        children: list["HTMLNode"] | None = None,
+        props: dict[str, str] | None = None,
     ):
         self.tag = tag
         self.value = value
         self.children = children
-        self.props = props
+        self.props = props or {}
 
     def to_html(self):
         raise NotImplementedError
