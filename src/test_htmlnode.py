@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -67,6 +67,22 @@ class TestHTMLNode(unittest.TestCase):
             node.__repr__(),
             "HTMLNode(p, What a strange world, None, {'class': 'primary'})",
         )
+
+    ## Leaf node tests-----------------------------------------------------------------------------
+    def test_leaf_to_html_p(self):
+        node = LeafNode("p", "Hello, world!")
+        self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
+
+    def test_no_value(self):
+        node = LeafNode("a", value=None)
+        with self.assertRaises(ValueError) as context:
+            node.to_html()
+
+        self.assertEquals(str(context.exception), "All leaf nodes must have a value")
+
+    def test_raw_value(self):
+        node = LeafNode(tag=None, value="This is a raw")
+        self.assertEqual(node.to_html(), "This is a raw")
 
 
 if __name__ == "__main__":
