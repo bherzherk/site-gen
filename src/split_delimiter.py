@@ -73,7 +73,7 @@ def split_nodes_link(old_nodes: list["TextNode"]):
 
         text = old_node.text
         links_mk = extract_markdown_links(text)
-        if len(links_mk) == 2:
+        if len(links_mk) == 0:
             new_nodes.append(old_node)
             continue
 
