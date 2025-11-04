@@ -52,3 +52,7 @@ class TestExtractImgLink(unittest.TestCase):
         text = "Check this site ![my site](https://url.com)"
         with self.assertRaises(ValueError):
             extract_markdown_links(text)
+
+
+if __name__ == "__main__":
+    unittest.main()
