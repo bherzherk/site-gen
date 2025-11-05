@@ -1,3 +1,4 @@
+from unittest import TextTestResult
 from textnode import TextNode, TextType
 from extract_img_links import extract_markdown_images, extract_markdown_links
 
@@ -35,7 +36,7 @@ def split_nodes_image(old_nodes: list["TextNode"]):
             continue
 
         text = old_node.text
-        images_mk = extract_markdown_images(text)
+        images_mk = extract_markdown_images(text) or []
         if len(images_mk) == 0:
             new_nodes.append(old_node)
             continue
@@ -72,7 +73,7 @@ def split_nodes_link(old_nodes: list["TextNode"]):
             continue
 
         text = old_node.text
-        links_mk = extract_markdown_links(text)
+        links_mk = extract_markdown_links(text) or []
         if len(links_mk) == 0:
             new_nodes.append(old_node)
             continue
@@ -98,3 +99,15 @@ def split_nodes_link(old_nodes: list["TextNode"]):
         if text != "":
             new_nodes.append(TextNode(text, TextType.TEXT))
     return new_nodes
+
+
+# function all in one:
+def text_to_textnodes(text):
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+
+    return nodes
