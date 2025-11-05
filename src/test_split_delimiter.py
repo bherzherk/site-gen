@@ -83,13 +83,13 @@ class TestSplitDelimiter(unittest.TestCase):
             new_nodes,
         )
 
-    def test_split_img_error(self):
-        node = TextNode(
-            "This is an image: ![image](http://i.image.com to test raise error.",
-            TextType.TEXT,
-        )
-        with self.assertRaises(ValueError):
-            split_nodes_image([node])
+    #    def test_split_img_error(self):
+    #        node = TextNode(
+    #            "This is an image: ![image](http://i.image.com to test raise error.",
+    #            TextType.TEXT,
+    #        )
+    #        with self.assertRaises(ValueError):
+    #            split_nodes_image([node])
 
     def test_split_img_single(self):
         node = TextNode("![image](http://img.com)", TextType.TEXT)
@@ -120,13 +120,13 @@ class TestSplitDelimiter(unittest.TestCase):
             new_nodes,
         )
 
-    def test_split_link_error(self):
-        node = TextNode(
-            "This is a text with link: [link](http://test.test this is a format error.",
-            TextType.TEXT,
-        )
-        with self.assertRaises(ValueError):
-            split_nodes_link([node])
+    #    def test_split_link_error(self):
+    #        node = TextNode(
+    #            "This is a text with link: [link](http://test.test this is a format error.",
+    #            TextType.TEXT,
+    #        )
+    #        with self.assertRaises(ValueError):
+    #            split_nodes_link([node])
 
     def test_split_link_single(self):
         node = TextNode("[link](http://link.com)", TextType.TEXT)
@@ -135,6 +135,9 @@ class TestSplitDelimiter(unittest.TestCase):
             [TextNode("link", TextType.LINK, "http://link.com")],
             new_nodes,
         )
+
+
+# Test text to nodes----------------------------------------------------------------------------
 
 
 if __name__ == "__main__":

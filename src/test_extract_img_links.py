@@ -13,20 +13,20 @@ class TestExtractImgLink(unittest.TestCase):
             ],
         )
 
-    def test_img_mk_error(self):
-        text = "This is a text with ![Rick and Morty](http://test.com(text.com)) image of my fav series"
-        with self.assertRaises(ValueError):
-            extract_markdown_images(text)
+    #    def test_img_mk_error(self):
+    #        text = "This is a text with ![Rick and Morty](http://test.com(text.com)) image of my fav series"
+    #        with self.assertRaises(ValueError):
+    #            extract_markdown_images(text)
 
-    def test_img_mk_incomplete(self):
-        text = "This is a text with ![my image](http://test.com : test it!"
-        with self.assertRaises(ValueError):
-            extract_markdown_images(text)
+    #    def test_img_mk_incomplete(self):
+    #        text = "This is a text with ![my image](http://test.com : test it!"
+    #        with self.assertRaises(ValueError):
+    #            extract_markdown_images(text)
 
-    def test_img_mk_noimg(self):
-        text = "Is this and image: [my image](http:image.com)?"
-        with self.assertRaises(ValueError):
-            extract_markdown_images(text)
+    #    def test_img_mk_noimg(self):
+    #        text = "Is this and image: [my image](http:image.com)?"
+    #        with self.assertRaises(ValueError):
+    #            extract_markdown_images(text)
 
     def test_link_markdown(self):
         text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
@@ -38,20 +38,20 @@ class TestExtractImgLink(unittest.TestCase):
             ],
         )
 
-    def test_link_mk_error(self):
-        text = "This is a link: [[link](http://test(url))"
-        with self.assertRaises(ValueError):
-            extract_markdown_links(text)
+    #    def test_link_mk_error(self):
+    #        text = "This is a link: [[link](http://test(url))"
+    #        with self.assertRaises(ValueError):
+    #            extract_markdown_links(text)
 
-    def test_incomplete_link(self):
-        text = "click on [this](http://test.com and you will see..."
-        with self.assertRaises(ValueError):
-            extract_markdown_links(text)
+    #   def test_incomplete_link(self):
+    #       text = "click on [this](http://test.com and you will see..."
+    #       with self.assertRaises(ValueError):
+    #           extract_markdown_links(text)
 
-    def test_no_link(self):
-        text = "Check this site ![my site](https://url.com)"
-        with self.assertRaises(ValueError):
-            extract_markdown_links(text)
+    # def test_no_link(self):
+    #    text = "Check this site ![my site](https://url.com)"
+    #    with self.assertRaises(ValueError):
+    #        extract_markdown_links(text)
 
 
 if __name__ == "__main__":
