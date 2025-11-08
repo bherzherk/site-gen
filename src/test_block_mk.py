@@ -3,6 +3,7 @@ import unittest
 from block_mk import BlockType, block_to_block_type, markdown_to_blocks
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from markdown_to_html import markdown_to_html_node
+from page_generator import extract_title
 
 
 class TestBlockMk(unittest.TestCase):
@@ -215,6 +216,24 @@ the **same** even with inline stuff
             html,
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
+
+    def test_extract_title(self):
+        text = "# head"
+        self.assertEqual(extract_title(text), "head")
+
+    def test_extract_title_error_1(self):
+        text = "## this is"
+        with self.assertRaises(ValueError) as context:
+            extract_title(text)
+
+    def test_extract_title_spaces(self):
+        text = "#            hello          "
+        self.assertEqual(extract_title(text), "hello")
+
+    def test_extract_title_error_2(self):
+        text = "#helloworld"
+        with self.assertRaises(ValueError) as context:
+            extract_title(text)
 
 
 if __name__ == "__main__":
