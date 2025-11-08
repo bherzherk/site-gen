@@ -1,6 +1,8 @@
 import os
 import shutil
+from sys import base_exec_prefix
 
+from page_generator import generate_page
 from textnode import TextNode, TextType
 
 
@@ -8,6 +10,10 @@ def main():
     source = "./static"
     destination = "./public"
     copy_content_to_dir(source, destination)
+    base_path = os.path.dirname(__file__)
+    source_path = os.path.join(base_path, "..", "content", "index.md")
+    destination_path = os.path.join(base_path, "..", "public", "index.html")
+    generate_page(source_path, "template.html", destination_path)
 
 
 def copy_content_to_dir(source: str, destination: str):
