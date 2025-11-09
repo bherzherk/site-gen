@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from pages_generator import generate_pages_recursive
 from textnode import TextNode, TextType
@@ -7,12 +8,15 @@ from textnode import TextNode, TextType
 
 def main():
     source = "./static"
-    destination = "./public"
+    destination = "./docs"
+    basepath = "/"
     copy_content_to_dir(source, destination)
     base_path = os.path.dirname(__file__)
     source_path = os.path.join(base_path, "..", "content")
-    destination_path = os.path.join(base_path, "..", "public")
-    generate_pages_recursive(source_path, "template.html", destination_path)
+    destination_path = os.path.join(base_path, "..", "docs")
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    generate_pages_recursive(source_path, "template.html", destination_path, basepath)
 
 
 def copy_content_to_dir(source: str, destination: str):
