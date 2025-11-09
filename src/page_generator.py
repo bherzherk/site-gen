@@ -13,7 +13,7 @@ def extract_title(markdown):
     raise ValueError("No h1 header detected!")
 
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     # Read markdown file
     markdown = from_path.read_text()
@@ -31,6 +31,8 @@ def generate_page(from_path, template_path, dest_path):
     # Replace placeholders
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", html)
+    template = template.replace("href='/", "href='" + basepath)
+    template = template.replace("src='/", "src='" + basepath)
 
     # Build destination file path (same name, but .html extension)
     dest_file = dest_path / (from_path.stem + ".html")
