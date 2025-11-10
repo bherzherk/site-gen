@@ -6,7 +6,7 @@ from markdown_to_html import markdown_to_html_node
 
 
 def extract_title(markdown):
-    if re.findall(r"^#\s+().*", markdown):
+    if re.findall(r"^#\s+(.*)", markdown):
         title = markdown.strip("#").strip()
         return title
 

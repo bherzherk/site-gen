@@ -3,20 +3,31 @@ import shutil
 import sys
 
 from pages_generator import generate_pages_recursive
-from textnode import TextNode, TextType
+
+dir_path_static = "./static"
+dir_path_public = "./docs"
+dir_path_content = "./content"
+template_path = "./template.html"
+default_basepath = "/"
 
 
 def main():
-    source = "./static"
-    destination = "./docs"
-    basepath = "/"
-    copy_content_to_dir(source, destination)
-    base_path = os.path.dirname(__file__)
-    source_path = os.path.join(base_path, "..", "content")
-    destination_path = os.path.join(base_path, "..", "docs")
+    print("sys.argv:", sys.argv)
+    basepath = default_basepath
     if len(sys.argv) > 1:
         basepath = sys.argv[1]
-    generate_pages_recursive(source_path, "template.html", destination_path, basepath)
+
+    print(basepath)
+    copy_content_to_dir(dir_path_static, dir_path_public)
+    # base_path = os.path.dirname(__file__)
+    # source_path = os.path.join(base_path, "..", "content")
+    # destination_path = os.path.join(base_path, "..", "docs")
+
+    print(basepath)
+    print()
+    generate_pages_recursive(
+        dir_path_content, "template.html", dir_path_public, basepath
+    )
 
 
 def copy_content_to_dir(source: str, destination: str):
