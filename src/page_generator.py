@@ -31,8 +31,8 @@ def generate_page(from_path, template_path, dest_path, basepath):
     # Replace placeholders
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", html)
-    template = template.replace("href='/", "href='" + basepath)
-    template = template.replace("src='/", "src='" + basepath)
+    template = template.replace('href="/', 'href="' + basepath)
+    template = template.replace('src="/', 'src="' + basepath)
 
     # Build destination file path (same name, but .html extension)
     dest_file = dest_path / (from_path.stem + ".html")
